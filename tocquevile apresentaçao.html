@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexis de Tocqueville · Sociologia + modo escuro</title>
+    <title>Alexis de Tocqueville · Sociologia + modo escuro + 6 abas</title>
     <style>
         /* === VARIÁVEIS DE TEMA CLARO (padrão) === */
         :root {
@@ -31,8 +31,7 @@
             --tab-hover-bg: #f5f0ea;
             --tab-active-color: #5e4b37;
             --tab-active-bg: #fcf9f5;
-            --relevancia-bg: #f4efe9;     /* seção específica */
-            --relevancia-text: inherit;
+            --relevancia-bg: #f4efe9;
             --info-list-border: #bba98b;
             --info-list-item-border: #d2c6b8;
             --placeholder-bg: #d6cdc0;
@@ -65,8 +64,7 @@
             --tab-hover-bg: #38424f;
             --tab-active-color: #e6d7c5;
             --tab-active-bg: #2f3a47;
-            --relevancia-bg: #2f3843;      /* escuro */
-            --relevancia-text: #e0e6ed;
+            --relevancia-bg: #2f3843;
             --info-list-border: #6f7e91;
             --info-list-item-border: #5e6c7e;
             --placeholder-bg: #4f5b68;
@@ -293,16 +291,57 @@
             margin-bottom: 0.5rem;
         }
 
-        /* --- Seção Relevância (corrigida) --- */
+        /* --- Seção Relevância --- */
         .relevancia-box {
             margin-top: 2rem;
-            background: var(--relevancia-bg) !important;
+            background: var(--relevancia-bg);
             padding: 1.5rem;
             border-radius: 20px;
             color: var(--text-primary);
         }
         .relevancia-box h3 {
             color: var(--heading-color);
+        }
+
+        /* --- Estilo para a nova aba Influências (usa .concept-grid adaptado) --- */
+        .influence-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        .influence-col {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 1.8rem;
+            border: 1px solid var(--card-border);
+        }
+        .influence-col h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-border);
+            border-bottom: 1px dashed var(--border-light);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+        .influence-list {
+            list-style: none;
+        }
+        .influence-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .influence-list li::before {
+            content: "•";
+            color: var(--accent-border);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .influence-list strong {
+            color: var(--accent-border);
         }
 
         footer {
@@ -324,6 +363,7 @@
             .container { padding: 1.5rem; }
             h1 { font-size: 2.2rem; }
             .tabs { justify-content: center; }
+            .influence-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -337,12 +377,14 @@
     <h1>Alexis de Tocqueville</h1>
     <p style="color: var(--text-soft); margin-bottom: 0.5rem;">O observador da democracia e das paixões igualitárias</p>
 
+    <!-- Agora com 6 abas -->
     <div class="tabs" role="tablist">
         <button class="tab-button active" id="tab-inicio" role="tab" aria-selected="true" aria-controls="inicio">Início</button>
         <button class="tab-button" id="tab-biografia" role="tab" aria-selected="false" aria-controls="biografia">Biografia</button>
         <button class="tab-button" id="tab-conceitos" role="tab" aria-selected="false" aria-controls="conceitos">Conceitos</button>
         <button class="tab-button" id="tab-obras" role="tab" aria-selected="false" aria-controls="obras">Obras</button>
         <button class="tab-button" id="tab-citacoes" role="tab" aria-selected="false" aria-controls="citacoes">Citações</button>
+        <button class="tab-button" id="tab-influencias" role="tab" aria-selected="false" aria-controls="influencias">Influências</button>
     </div>
 
     <!-- INÍCIO -->
@@ -358,7 +400,6 @@
                 <p style="font-size: 0.9rem;">1805–1859</p>
             </div>
         </div>
-        <!-- SEÇÃO RELEVÂNCIA (corrigida: usa classe e variáveis) -->
         <div class="relevancia-box">
             <h3>Relevância contemporânea</h3>
             <p>A sociologia atual ainda dialoga com suas intuições: a ascensão de populismos, a crise das mediações democráticas, o poder das redes e a tensão entre igualdade e liberdade. Autores como Robert Putnam e Pierre Rosanvallon retomam categorias tocquevilleanas para entender o declínio do capital social e as transformações da legitimidade democrática.</p>
@@ -410,8 +451,37 @@
         <div class="quote-block"><p>“A Revolução Francesa não teve território próprio; ou melhor, seu efeito foi apagar todas as fronteiras antigas.”</p><div class="quote-author">O Antigo Regime e a Revolução</div></div>
     </div>
 
+    <!-- NOVA ABA: INFLUÊNCIAS -->
+    <div id="influencias" class="tab-pane" role="tabpanel" aria-labelledby="tab-influencias">
+        <h2>Rede de influências</h2>
+        <div class="influence-grid">
+            <div class="influence-col">
+                <h3>🗿 Influenciaram Tocqueville</h3>
+                <ul class="influence-list">
+                    <li><strong>Montesquieu</strong> – O espírito das leis, a relação entre instituições e costumes, a importância dos corpos intermediários.</li>
+                    <li><strong>Blaise Pascal</strong> – A reflexão sobre a condição humana, a miséria e grandeza, presente em suas anotações íntimas.</li>
+                    <li><strong>Jean-Jacques Rousseau</strong> – O conceito de vontade geral e o contrato social, embora Tocqueville seja mais liberal.</li>
+                    <li><strong>François Guizot</strong> – História da civilização e a ideia de soberania da razão.</li>
+                    <li><strong>Edmund Burke</strong> – A crítica à ruptura revolucionária radical e a valorização da tradição.</li>
+                </ul>
+            </div>
+            <div class="influence-col">
+                <h3>🌍 Influenciou</h3>
+                <ul class="influence-list">
+                    <li><strong>Émile Durkheim</strong> – A análise das formas de solidariedade e a importância das associações profissionais.</li>
+                    <li><strong>Max Weber</strong> – A relação entre ética, religião e o espírito do capitalismo; o método comparativo.</li>
+                    <li><strong>Hannah Arendt</strong> – As reflexões sobre totalitarismo, isolamento e a perda do espaço público.</li>
+                    <li><strong>Raymond Aron</strong> – A sociologia das sociedades industriais e a defesa do liberalismo moderado.</li>
+                    <li><strong>Robert Putnam</strong> – O capital social e o declínio do associativismo na América contemporânea.</li>
+                    <li><strong>Pierre Rosanvallon</strong> – A história da democracia e as transformações da legitimidade.</li>
+                </ul>
+            </div>
+        </div>
+        <p style="margin-top: 1rem; font-style: italic;">Tocqueville dialoga com toda a tradição do pensamento social, e seu trabalho permanece uma referência viva para a teoria democrática.</p>
+    </div>
+
     <footer>
-        <p>Página interativa com abas · conceitos sociológicos sobre Tocqueville · <a href="#">referências</a></p>
+        <p>Página interativa com 6 abas · conceitos sociológicos sobre Tocqueville · <a href="#">referências</a></p>
     </footer>
 </div>
 
@@ -421,7 +491,6 @@
         const btn = document.getElementById('darkmode-btn');
         const body = document.body;
 
-        // Verifica preferência salva
         if (localStorage.getItem('darkMode') === 'enabled') {
             body.classList.add('dark-mode');
         }
@@ -435,7 +504,7 @@
             }
         });
 
-        // ----- Lógica das abas (igual ao anterior, mas adaptada) -----
+        // ----- Lógica das abas (funciona para qualquer número de abas) -----
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabPanes = document.querySelectorAll('.tab-pane');
 
@@ -466,6 +535,8 @@
                 activateTab(id);
             });
         });
+
+        // Se quiser que a primeira aba (inicio) seja ativa ao carregar, já está ok pelo HTML.
     })();
 </script>
 <!-- Servidor Node.js opcional (comentado) 
