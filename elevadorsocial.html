@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Elevador Social Quebrou? · Classes e Mobilidade no Brasil · Pedro e José</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            background: #1f1b16;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #efe6dc;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg-dark: #1f1b16;
+            --surface-dark: #2c2620;
+            --card-bg: #332c24;
+            --accent: #4b7dc9;
+            --accent-glow: #3265a5;
+            --text-light: #e7dbce;
+            --border-dim: #384a5a;
+            --gold: #62b1db;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2rem 3rem;
+        }
+
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--accent);
+        }
+        .hero-text {
+            flex: 2;
+        }
+        .hero-text h1 {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #7ab8e2, #3a6fb8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .hero-text .tagline {
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .hero-text p {
+            font-size: 1rem;
+            max-width: 700px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        .hero-img {
+            flex: 1;
+            min-width: 200px;
+            background: var(--surface-dark);
+            border-radius: 2rem;
+            padding: 1rem;
+            border: 1px solid var(--border-dim);
+            text-align: center;
+        }
+        .hero-img img {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 1rem;
+            filter: sepia(0.1) contrast(1.02);
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .hero-img .caption {
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+            color: #c6b094;
+        }
+
+        .nav-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 2rem 0 3rem;
+            background: rgba(44, 38, 32, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            border: 1px solid var(--border-dim);
+        }
+        .nav-bar a {
+            padding: 0.5rem 1.2rem;
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            border-radius: 40px;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .nav-bar a:hover,
+        .nav-bar a.active {
+            background: var(--accent);
+            color: #1f1b16;
+            box-shadow: 0 0 8px rgba(75, 125, 201, 0.5);
+        }
+
+        section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 100px;
+        }
+        h2 {
+            font-size: clamp(1.6rem, 5vw, 2rem);
+            font-weight: 600;
+            margin-bottom: 1.8rem;
+            display: inline-block;
+            border-left: 5px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        .author-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .author-card {
+            background: var(--surface-dark);
+            border-radius: 1.8rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border-dim);
+            transition: transform 0.2s;
+        }
+        .author-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .author-name {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 0.2rem;
+        }
+        .author-period {
+            font-size: 0.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+        .author-bio,
+        .author-style,
+        .author-works {
+            margin-bottom: 1rem;
+        }
+        .author-bio p,
+        .author-style p,
+        .author-works p {
+            font-size: 0.9rem;
+            color: #ddd0c0;
+        }
+        .author-works ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+        .author-works li {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+            position: relative;
+        }
+        .author-works li::before {
+            content: "📊";
+            position: absolute;
+            left: -1.2rem;
+            color: var(--accent);
+        }
+        .trecho {
+            background: #2a231d;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+            border-left: 3px solid var(--gold);
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #f2e2ce;
+        }
+        .trecho span {
+            display: block;
+            margin-top: 0.5rem;
+            font-style: normal;
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-align: right;
+        }
+
+        .timeline-vert {
+            margin-top: 2rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline-vert::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: var(--accent);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--bg-dark);
+        }
+        .timeline-year {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .double-legacy {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .legacy-card {
+            background: var(--surface-dark);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border-dim);
+        }
+        .legacy-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .quote-carousel {
+            background: #2a231d;
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+        .quote-slide {
+            display: none;
+            animation: fade 0.4s ease;
+        }
+        .quote-slide.active {
+            display: block;
+        }
+        .quote-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #f2e6d8;
+            line-height: 1.5;
+        }
+        .quote-source {
+            margin-top: 1rem;
+            text-align: right;
+            color: var(--gold);
+            font-size: 0.85rem;
+        }
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .carousel-controls button {
+            background: var(--accent);
+            border: none;
+            color: #1f1b16;
+            font-weight: 600;
+            padding: 0.4rem 1.2rem;
+            border-radius: 2rem;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-dim);
+            text-align: center;
+            color: #b9a586;
+            font-size: 0.8rem;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 1rem;
+            }
+            .author-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-bar a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        .top-btn {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--accent);
+            border: none;
+            color: #1f1b16;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.2s;
+            z-index: 99;
+        }
+        .top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .char-list {
+            list-style: none;
+            padding-left: 1rem;
+        }
+        .char-list li {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+        .char-list li::before {
+            content: "✦";
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <div class="hero-text">
+                <h1>Elevador Social Quebrou?</h1>
+                <div class="tagline">Classes, mérito e mobilidade no Brasil · Século XXI</div>
+                <p>A ideia de que o esforço individual é suficiente para ascender socialmente está profundamente enraizada no imaginário brasileiro. No entanto, dados de desigualdade educacional, segregação urbana e transmissão intergeracional de renda revelam um cenário bem mais complexo. Este painel analisa como a classe social de origem condiciona – e muitas vezes determina – as trajetórias escolares e profissionais, questionando até que ponto o mérito realmente importa em um dos países mais desiguais do mundo.</p>
+            </div>
+            <div class="hero-img">
+                <img src="https://www.nexojornal.com.br/infograficos/imagens/grafico-mobilidade-social-brasil-ocde.png"
+                alt="Gráfico comparativo de mobilidade social entre Brasil e países da OCDE"
+                onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Gini_Coefficient_of_Wealth_Inequality_source.png/800px-Gini_Coefficient_of_Wealth_Inequality_source.png';"
+                loading="eager">
+                <div class="caption">Fonte: Relatórios OCDE / IBGE · Mobilidade intergeracional de renda</div>
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <a href="#intro" class="nav-link" data-section="intro">Contexto</a>
+            <a href="#educacao" class="nav-link" data-section="educacao">Educação</a>
+            <a href="#trabalho" class="nav-link" data-section="trabalho">Mercado de Trabalho</a>
+            <a href="#raca-genero" class="nav-link" data-section="raca-genero">Raça & Gênero</a>
+            <a href="#politicas" class="nav-link" data-section="politicas">Políticas Públicas</a>
+            <a href="#citacoes" class="nav-link" data-section="citacoes">Citações</a>
+        </div>
+
+        <!-- INTRODUÇÃO - O mito da meritocracia -->
+        <section id="intro">
+            <h2>📉 O Mito da Meritocracia no Brasil</h2>
+            <div class="double-legacy">
+                <div class="legacy-card">
+                    <h3>Contexto socioeconômico</h3>
+                    <p>O Brasil figura entre as dez nações mais desiguais do planeta, com um índice de Gini persistentemente acima de 0,50. A concentração de renda é histórica: herança colonial escravocrata, industrialização tardia e um Estado de bem-estar social frágil. Nesse cenário, a narrativa da meritocracia – segundo a qual talento e esforço bastam para vencer – funciona muitas vezes como um véu ideológico que esconde a reprodução das desigualdades de classe.</p>
+                </div>
+                <div class="legacy-card">
+                    <h3>Como a origem de classe define oportunidades</h3>
+                    <ul class="char-list">
+                        <li>Crianças ricas têm acesso a creches, escolas bilíngues e atividades extracurriculares desde os primeiros anos de vida.</li>
+                        <li>Famílias de baixa renda enfrentam escolas públicas precárias, insegurança alimentar e falta de tempo para acompanhamento escolar.</li>
+                        <li>Redes de contato (capital social) e herança cultural (capital cultural) são transmitidas de pais para filhos de forma invisível.</li>
+                        <li>O “berço” determina não apenas a renda presente, mas o horizonte de expectativas: o que é “possível” sonhar.</li>
+                        <li>Dados do IBGE mostram que 70% dos filhos de pais pobres permanecem pobres na vida adulta.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-vert">
+                <div class="timeline-item"><div class="timeline-year">1960–1980</div><div class="timeline-title">Industrialização e esperança de ascensão</div><p>A urbanização acelerada e a expansão do emprego formal criaram uma sensação de elevador social em funcionamento, embora com forte concentração regional.</p></div>
+                <div class="timeline-item"><div class="timeline-year">1980–2000</div><div class="timeline-title">Crises e estagnação</div><p>A década perdida freou o crescimento. A desigualdade educacional se cristalizou, com a elite migrando para escolas privadas e o ensino público se deteriorando.</p></div>
+                <div class="timeline-item"><div class="timeline-year">2000–2015</div><div class="timeline-title">Breve redução da pobreza</div><p>Políticas de transferência de renda (Bolsa Família), valorização do salário mínimo e expansão universitária (FIES, Prouni, cotas) ampliaram o acesso, mas sem romper a estrutura de classes.</p></div>
+                <div class="timeline-item"><div class="timeline-year">2016–Presente</div><div class="timeline-title">Crise e retrocessos</div><p>Recessão, pandemia e cortes em políticas sociais revelaram a fragilidade dos avanços. A mobilidade ascendente desacelerou, e o mito do mérito voltou a ser questionado.</p></div>
+            </div>
+        </section>
+
+        <!-- EDUCAÇÃO -->
+        <section id="educacao">
+            <h2>🎓 Educação: O Primeiro Degrau (e o Primeiro Filtro)</h2>
+            <div class="author-grid">
+                <div class="author-card">
+                    <div class="author-name">Educação Básica</div>
+                    <div class="author-period">O berço define a carteira</div>
+                    <div class="author-bio"><strong>📖 Panorama</strong><p>O sistema educacional brasileiro é marcado por uma divisão de classe radical: enquanto a elite frequenta escolas privadas de alto padrão, a maioria da população depende de escolas públicas com infraestrutura deficitária, professores mal remunerados e carga horária reduzida. O resultado aparece nos indicadores: apenas 5% dos alunos de escola pública alcançam níveis adequados de aprendizagem em matemática ao final do ensino fundamental.</p></div>
+                    <div class="author-style"><strong>✍️ Mecanismos de exclusão</strong><p>Falta de acesso à educação infantil de qualidade, distorção idade-série, trabalho infantil, e ausência de políticas de permanência (transporte, alimentação, material) criam uma barreira quase intransponível para os mais pobres.</p></div>
+                    <div class="author-works"><strong>📚 Dados relevantes</strong><ul><li>Taxa de evasão no Ensino Médio: 8,8% (maior entre pretos e pardos).</li><li>Apenas 22% dos jovens de 18 a 24 anos estão no Ensino Superior.</li></ul></div>
+                    <div class="trecho">“A escola pública brasileira não é uma escada, é uma peneira: filtra os poucos que conseguem driblar o abandono, a fome e a falta de perspectiva.”<span>— Análise baseada em Florestan Fernandes</span></div>
+                </div>
+                <div class="author-card">
+                    <div class="author-name">Ensino Superior</div>
+                    <div class="author-period">A falsa democratização</div>
+                    <ul class="char-list" style="margin-top:1rem">
+                        <li>A expansão de vagas (FIES, Prouni, REUNI) ampliou o acesso, mas as carreiras de maior prestígio e retorno financeiro (Medicina, Direito nas federais) permanecem dominadas por brancos de classe alta.</li>
+                        <li>Cotas sociais e raciais ajudaram a diversificar o perfil dos estudantes, mas a evasão entre cotistas ainda é elevada por falta de suporte financeiro e pedagógico.</li>
+                        <li>O diploma deixou de ser garantia de ascensão: há subocupação de graduados em funções de nível técnico, especialmente em períodos de crise.</li>
+                        <li>A “corrida” por pós-graduação e cursos no exterior é quase impossível para quem precisa trabalhar durante a graduação.</li>
+                    </ul>
+                    <div class="trecho" style="margin-top:1rem">“Ter um diploma não significa ter as mesmas oportunidades. A origem de classe define não apenas se você entra, mas como você permanece e qual caminho trilha depois.”<span>— Pierre Bourdieu, adaptado ao contexto brasileiro</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MERCADO DE TRABALHO -->
+        <section id="trabalho">
+            <h2>💼 Mercado de Trabalho e Herança de Classe</h2>
+            <div class="author-grid">
+                <div class="author-card">
+                    <div class="author-name">Capital Social e Redes</div>
+                    <div class="author-period">O poder do Q.I. (“quem indica”)</div>
+                    <div class="author-bio"><strong>📖 Síntese</strong><p>No Brasil, uma parcela significativa das colocações profissionais – especialmente as mais bem remuneradas – depende de redes de relacionamento construídas desde a infância. Famílias de classe média alta e elite transmitem aos filhos não apenas bens materiais, mas contatos profissionais, estágios em empresas de amigos e acesso a círculos restritos de decisão.</p></div>
+                    <div class="author-style"><strong>✍️ Barreiras para quem vem de baixo</strong><p>Ausência de “soft skills” valorizadas em processos seletivos (inglês fluente, intercâmbios, hobbies de elite), falta de acesso a estágios não remunerados e necessidade de gerar renda imediata empurram jovens pobres para a informalidade ou para ocupações de baixa qualificação.</p></div>
+                    <div class="author-works"><strong>📚 Evidências empíricas</strong><ul><li>Estudo do IPEA mostra que um trabalhador filho de pais analfabetos ganha, em média, 55% menos do que um colega com mesma escolaridade mas filho de pais com ensino superior.</li><li>Mulheres negras ocupam a base da pirâmide salarial, mesmo controlando por nível educacional.</li></ul></div>
+                    <div class="trecho">“O talento existe em todas as classes. O que falta é a rampa de acesso.”<span>— Jessé Souza, A Elite do Atraso</span></div>
+                </div>
+                <div class="author-card">
+                    <div class="author-name">Trajetórias Profissionais Típicas</div>
+                    <div class="author-period">Classe e destino ocupacional</div>
+                    <ul class="char-list" style="margin-top:1rem">
+                        <li><strong>Classe Alta:</strong> Formação em colégios de elite → universidade pública de prestígio ou exterior → estágios por indicação → cargos de liderança.</li>
+                        <li><strong>Classe Média:</strong> Escola particular de bairro → faculdade privada (noturno) → analista / técnico → estagnação salarial.</li>
+                        <li><strong>Classe Baixa:</strong> Escola pública precária → evasão ou técnico de baixa qualidade → serviços informais ou operacionais → reprodução da pobreza.</li>
+                        <li>A meritocracia funciona apenas quando as condições de partida são iguais – e no Brasil, são brutalmente desiguais.</li>
+                    </ul>
+                    <div class="trecho">“O elevador social brasileiro tem andares quebrados: poucos sobem, muitos descem, e a maioria sequer consegue embarcar.”<span>— Síntese a partir de estudos da FGV Social</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RAÇA E GÊNERO -->
+        <section id="raca-genero">
+            <h2>✊🏿 Raça & Gênero: Desigualdades que se Sobrepoem</h2>
+            <div class="author-grid">
+                <div class="author-card">
+                    <div class="author-name">Desigualdade Racial</div>
+                    <div class="author-period">Herança da escravidão e racismo estrutural</div>
+                    <div class="author-bio"><strong>📖 Panorama histórico</strong><p>O Brasil foi o último país do Ocidente a abolir a escravidão (1888). A população negra jamais recebeu reparação territorial, educacional ou financeira. Como resultado, pretos e pardos estão sobrerrepresentados nas faixas de menor renda, na informalidade e nas ocupações manuais, enquanto brancos dominam os postos de comando e as profissões de maior prestígio.</p></div>
+                    <div class="author-style"><strong>✍️ Interseccionalidade</strong><p>Raça e classe se articulam: a probabilidade de uma criança negra nascida em família pobre ascender socialmente é drasticamente menor do que a de uma criança branca na mesma condição econômica. O racismo atua como um “pedágio” adicional na trajetória.</p></div>
+                    <div class="author-works"><strong>📚 Dados</strong><ul><li>Pretos e pardos são 75,2% dos 10% mais pobres.</li><li>Brancos são 70,6% dos 1% mais ricos.</li><li>Rendimento médio de brancos é 73,9% maior que o de pretos e pardos (IBGE).</li></ul></div>
+                    <div class="trecho">“Não basta ser pobre para entender a pobreza brasileira. É preciso ser pobre e negro para sentir o peso completo da exclusão.”<span>— Lélia Gonzalez</span></div>
+                </div>
+                <div class="author-card">
+                    <div class="author-name">Desigualdade de Gênero</div>
+                    <div class="author-period">Teto de vidro e divisão sexual do trabalho</div>
+                    <ul class="char-list" style="margin-top:1rem">
+                        <li>Mulheres ganham em média 20,5% menos que homens na mesma função, segundo o IBGE.</li>
+                        <li>A dupla jornada (trabalho remunerado + cuidado doméstico) limita a ascensão profissional feminina.</li>
+                        <li>Mulheres negras são o grupo mais vulnerável: menor escolaridade, menores salários e maior desemprego.</li>
+                        <li>O “teto de vidro” é espesso para mulheres de classe baixa, que sequer chegam perto dos degraus superiores.</li>
+                        <li>Maternidade precoce (mais comum em classes baixas) interrompe trajetórias escolares e profissionais.</li>
+                    </ul>
+                    <div class="trecho">“A mulher pobre não luta contra um teto de vidro, mas contra paredes de concreto.”<span>— Adaptado de Heleieth Saffioti</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- POLÍTICAS PÚBLICAS -->
+        <section id="politicas">
+            <h2>🏛️ Políticas Públicas e o Resgate do Elevador</h2>
+            <div class="author-grid">
+                <div class="author-card">
+                    <div class="author-name">O que já foi feito</div>
+                    <div class="author-period">Avanços e limites</div>
+                    <div class="author-bio"><strong>📖 Iniciativas</strong><p>Bolsa Família (2003) reduziu a extrema pobreza e melhorou indicadores de frequência escolar. As cotas raciais e sociais nas universidades (Lei 12.711/2012) mudaram o perfil do ensino superior. O FIES e o Prouni permitiram que milhões de jovens de baixa renda acessassem o ensino superior privado. A valorização do salário mínimo entre 2004 e 2015 impulsionou a renda das famílias mais pobres.</p></div>
+                    <div class="author-style"><strong>✍️ Limites estruturais</strong><p>Apesar dos avanços, as políticas foram insuficientes para quebrar a reprodução de classe. O ensino básico público continuou degradado, a reforma agrária nunca foi realizada e o sistema tributário brasileiro é regressivo, onerando proporcionalmente mais os pobres.</p></div>
+                    <div class="author-works"><strong>📚 Efeitos mensuráveis</strong><ul><li>A pobreza caiu de 23,9% (2002) para 8,4% (2014), mas voltou a subir para 13,5% em 2022.</li><li>O percentual de estudantes negros em federais subiu de 10% para 50% com as cotas.</li></ul></div>
+                    <div class="trecho">“A meritocracia só é justa quando o ponto de partida é nivelado. Sem políticas públicas redistributivas, o discurso do mérito é apenas uma forma de culpar o pobre pela própria pobreza.”<span>— Michael Sandel, A Tirania do Mérito</span></div>
+                </div>
+                <div class="author-card">
+                    <div class="author-name">O que ainda precisa ser feito</div>
+                    <div class="author-period">Agenda para um elevador social real</div>
+                    <ul class="char-list" style="margin-top:1rem">
+                        <li>Investimento massivo na educação infantil e no ensino básico público, com escolas em tempo integral e valorização docente.</li>
+                        <li>Reforma tributária progressiva, taxando grandes fortunas e reduzindo impostos sobre consumo.</li>
+                        <li>Políticas de permanência estudantil robustas (bolsas, moradia, alimentação, saúde mental).</li>
+                        <li>Incentivo à formalização do trabalho e redução da informalidade.</li>
+                        <li>Enfrentamento ao racismo estrutural e ao machismo institucional com ações afirmativas em todos os setores.</li>
+                        <li>Ampliação do acesso à cultura, ao lazer e às novas tecnologias nas periferias.</li>
+                    </ul>
+                    <div class="trecho">“Um país que não investe na igualdade de oportunidades condena gerações a repetir o destino de seus pais.”<span>— Amartya Sen, Desenvolvimento como Liberdade</span></div>
+                </div>
+            </div>
+            <div class="legacy-card" style="margin-top: 1rem;">
+                <h3>📊 O Brasil no mundo: mobilidade intergeracional</h3>
+                <p>De acordo com a OCDE, o Brasil é um dos países com menor mobilidade social do mundo. Enquanto na Dinamarca são necessárias, em média, duas gerações para que uma família de baixa renda atinja a média nacional, no Brasil são necessárias <strong>nove gerações</strong>. Isso significa que um brasileiro nascido na base da pirâmide em 2025 tem pouca chance de ver seus tataranetos na classe média – e isso supondo que nada piore.</p>
+            </div>
+        </section>
+
+        <!-- CITAÇÕES CARROSSEL -->
+        <section id="citacoes">
+            <h2>🗣️ Vozes sobre Mobilidade e Mérito</h2>
+            <div class="quote-carousel">
+                <div class="quote-slide active">
+                    <div class="quote-text">“A meritocracia é uma ilusão que permite aos vencedores atribuir seu sucesso unicamente a seus méritos, ignorando os privilégios herdados.”</div>
+                    <div class="quote-source">— Michael Sandel, A Tirania do Mérito</div>
+                </div>
+                <div class="quote-slide">
+                    <div class="quote-text">“No Brasil, a classe social de origem é o principal preditor do destino de uma pessoa. O talento individual é um fator residual.”</div>
+                    <div class="quote-source">— Jessé Souza, A Elite do Atraso</div>
+                </div>
+                <div class="quote-slide">
+                    <div class="quote-text">“Não existe país desenvolvido sem um sistema educacional público de qualidade que compense as desigualdades de origem.”</div>
+                    <div class="quote-source">— Florestan Fernandes</div>
+                </div>
+                <div class="quote-slide">
+                    <div class="quote-text">“O racismo é o grande fermento da desigualdade brasileira. Ele opera em silêncio, mas estrutura todas as hierarquias.”</div>
+                    <div class="quote-source">— Lélia Gonzalez</div>
+                </div>
+                <div class="carousel-controls">
+                    <button id="prevQuote">◀ Anterior</button>
+                    <button id="nextQuote">Próxima ▶</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Elevador Social Quebrou? · Classes, mérito e mobilidade no Brasil</p>
+            <p>Referências: IBGE, IPEA, OCDE, FGV Social, Jessé Souza ("A Elite do Atraso"), Michael Sandel ("A Tirania do Mérito"), Pierre Bourdieu, Florestan Fernandes.</p>
+            <p><strong>Integrantes do grupo:</strong> Pedro e José</p>
+        </footer>
+    </div>
+
+    <button class="top-btn" id="topBtn" aria-label="Voltar ao topo">↑</button>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+
+        function updateActive() {
+            let current = '';
+            const scrollPos = window.scrollY + 130;
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                if (scrollPos >= top && scrollPos < bottom) current = section.id;
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+            });
+        }
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.getElementById(link.getAttribute('href').substring(1));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        window.addEventListener('scroll', updateActive);
+        window.addEventListener('load', updateActive);
+
+        const slides = document.querySelectorAll('.quote-slide');
+        let slideIndex = 0;
+
+        function showSlide(i) {
+            slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+        }
+        const nextBtn = document.getElementById('nextQuote');
+        const prevBtn = document.getElementById('prevQuote');
+        if (nextBtn && prevBtn) {
+            nextBtn.addEventListener('click', () => {
+                slideIndex = (slideIndex + 1) % slides.length;
+                showSlide(slideIndex);
+            });
+            prevBtn.addEventListener('click', () => {
+                slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+                showSlide(slideIndex);
+            });
+        }
+
+        const topBtn = document.getElementById('topBtn');
+        window.addEventListener('scroll', () => {
+            topBtn.classList.toggle('visible', window.scrollY > 400);
+        });
+        topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    </script>
+</body>
+</html>
